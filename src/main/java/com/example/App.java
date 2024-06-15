@@ -6,7 +6,13 @@ import java.util.logging.Logger;
 import com.example.Abstract.Car;
 import com.example.Abstract.House;
 import com.example.Abstract.Impl.Employee;
+import com.example.Constants.AppConstants;
 import com.example.Dto.State;
+import com.example.Factory.Airplane;
+import com.example.Factory.FactoryTransport;
+import com.example.Factory.Itransport;
+import com.example.Factory.Ship;
+import com.example.Factory.Vehicle;
 import com.example.Singleton.DbConnection;
 
 /**
@@ -32,8 +38,11 @@ public class App {
         Car car = buildCar();
         logger.info(car.getBrand());
 
-        //Call singleton pattern
+        // Call singleton pattern
         singleton();
+
+        // Call Factory pattern
+        factory();
     }
 
     // Builder pattern
@@ -53,6 +62,20 @@ public class App {
         logger.info("\n\n*********** SINGLETON PATTERN (\"***********");
         logger.info("Hashcode:" + dbConnection1.hashCode());
         logger.info("Hashcode:" + dbConnection2.hashCode());
-        logger.info(String.valueOf(dbConnection1==dbConnection2));
+        logger.info(String.valueOf(dbConnection1 == dbConnection2));
+    }
+
+    // Factory transportation
+    public static void factory() {
+        logger.info("\n\n*********** FACTORY PATTERN (\"***********");
+
+        Itransport airplane = FactoryTransport.createTransport(AppConstants.AIRPLANE);
+        airplane.startEngine();
+
+        Itransport ship = FactoryTransport.createTransport(AppConstants.SHIP);
+        ship.startEngine();
+
+        Itransport vehicle = FactoryTransport.createTransport(AppConstants.VEHICLE);
+        vehicle.startEngine();
     }
 }
