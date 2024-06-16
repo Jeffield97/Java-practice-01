@@ -9,6 +9,7 @@ import com.example.Constants.AppConstants;
 import com.example.Dto.State;
 import com.example.Factory.FactoryTransport;
 import com.example.Factory.Itransport;
+import com.example.Prototype.Normal;
 import com.example.Singleton.DbConnection;
 
 /**
@@ -29,13 +30,16 @@ public class App {
         employee.setSalary(900.0);
 
         // Call build pattern
-        builder();
+        // builder();
 
         // Call singleton pattern
-        singleton();
+        // singleton();
 
         // Call Factory pattern
-        factory();
+        // factory();
+
+        // Call Prototype pattern
+        prototype();
     }
 
     // Builder pattern
@@ -71,5 +75,17 @@ public class App {
 
         Itransport vehicle = FactoryTransport.createTransport(AppConstants.VEHICLE);
         vehicle.startEngine();
+    }
+
+    // Prototype
+    public static void prototype() {
+        logger.info("\n\n*********** PROTOTYPE PATTERN (\"***********");
+        Normal normalBase = new Normal();
+        normalBase.setState("Habilitado");
+        Normal normal1 = normalBase.clone();
+        Normal normal2 = normalBase.clone();
+        System.out.println("Objeto base:" + normalBase.getState() + ", " + normalBase.hashCode());
+        System.out.println("Clon 1: " + normal1.getState() +", "+ normal1.hashCode());
+        System.out.println("Clon 1: " + normal2.getState() + ", " + normal2.hashCode());
     }
 }
