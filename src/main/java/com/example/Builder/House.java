@@ -1,4 +1,4 @@
-package com.example.Abstract;
+package com.example.Builder;
 
 public class House {
     Double area;
@@ -10,22 +10,18 @@ public class House {
         this.cost = builder.cost;
         this.owner = builder.owner;
     }
-    
 
     public Double getArea() {
         return area;
     }
 
-
     public Double getCost() {
         return cost;
     }
 
-
     public String getOwner() {
         return owner;
     }
-
 
     public static class Builder {
         private Double area;

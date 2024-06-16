@@ -1,18 +1,14 @@
 package com.example;
 
-import java.io.PrintStream;
 import java.util.logging.Logger;
 
-import com.example.Abstract.Car;
-import com.example.Abstract.House;
+import com.example.Builder.Car;
+import com.example.Builder.House;
 import com.example.Abstract.Impl.Employee;
 import com.example.Constants.AppConstants;
 import com.example.Dto.State;
-import com.example.Factory.Airplane;
 import com.example.Factory.FactoryTransport;
 import com.example.Factory.Itransport;
-import com.example.Factory.Ship;
-import com.example.Factory.Vehicle;
 import com.example.Singleton.DbConnection;
 
 /**
@@ -25,18 +21,15 @@ public class App {
     static Logger logger = Logger.getLogger(App.class.getName());
 
     public static void main(String[] args) {
+
+        // Abstract class
         Employee employee = new Employee();
         employee.setName("Jeffield");
         employee.setAge(20);
         employee.setSalary(900.0);
 
-        // Call to buildHouse
-        House house = buildHouse();
-        logger.info(house.getOwner());
-
-        // Call to buildCar
-        Car car = buildCar();
-        logger.info(car.getBrand());
+        // Call build pattern
+        builder();
 
         // Call singleton pattern
         singleton();
@@ -46,19 +39,20 @@ public class App {
     }
 
     // Builder pattern
-    public static House buildHouse() {
-        return new House.Builder().area(200.0).cost(300.0).owner("Jeffield").build();
-    }
+    public static void builder() {
+        logger.info("\n\n*********** SINGLETON PATTERN (\"***********");
 
-    // Buider pattern
-    public static Car buildCar() {
-        return new Car.Builder().brand("BWM").color("Gray").cost(40000.0).state(State.New).build();
+        House house = new House.Builder().area(200.0).cost(300.0).owner("Jeffield").build();
+        logger.info(house.getOwner());
+
+        Car car = new Car.Builder().brand("BMW").color("Gray").cost(30000.0).build();
+        logger.info(car.getBrand());
     }
 
     // Singleton patternS
     public static void singleton() {
-        DbConnection dbConnection1 = new DbConnection().getInstance();
-        DbConnection dbConnection2 = new DbConnection().getInstance();
+        DbConnection dbConnection1 = DbConnection.getInstance();
+        DbConnection dbConnection2 = DbConnection.getInstance();
         logger.info("\n\n*********** SINGLETON PATTERN (\"***********");
         logger.info("Hashcode:" + dbConnection1.hashCode());
         logger.info("Hashcode:" + dbConnection2.hashCode());

@@ -1,14 +1,12 @@
-package com.example.Abstract;
+package com.example.Builder;
 
-import com.example.Dto.State;;
+import com.example.Dto.State;
 
 public class Car {
     private String color;
     private String brand;
     private Double cost;
     private State state;
-
-
 
     public String getColor() {
         return color;
